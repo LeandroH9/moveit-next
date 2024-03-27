@@ -1,6 +1,6 @@
 
 import { useContext, useState } from 'react';
-import styles from '../styles/components/LoginGitHub.module.css'
+import styles from '@styles/components/LoginGitHub.module.css'
 import Router from 'next/router'
 import Cookies from 'js-cookie';
 

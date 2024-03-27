@@ -1,5 +1,5 @@
 
-import styles from '../styles/components/MenuLateral.module.css'
+import styles from '@styles/components/MenuLateral.module.css'
 
 export function MenuLateral(){
     return(
