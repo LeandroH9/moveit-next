@@ -1,9 +1,17 @@
 
-import Login from '../pages';
+import { useContext, useState } from 'react';
 import styles from '../styles/components/LoginGitHub.module.css'
 import Router from 'next/router'
+import Cookies from 'js-cookie';
 
 export function LoginGitHub(){
+    const [name, setName] = useState('')
+
+    function handleNavigateHome(){
+        Cookies.set('name', name);
+        Router.push('/home')
+    }
+
     return(
         <div className={styles.loginContainer}>
             <div>
@@ -11,14 +19,14 @@ export function LoginGitHub(){
             </div>
             <section>
                 <strong>Bem-vindo</strong>
-                <div className={styles.gitHubInfo}>
+                {/* <div className={styles.gitHubInfo}>
                     <img src="/icons/logotipo-do-github.svg"/>
                     Faça login com seu Github para começar
-                </div>
+                </div> */}
                 <div>
-                    <input type="text" className={styles.entrarInput} placeholder="Digite seu username" >
+                    <input type="text"  value={name} onChange={(value) => setName(value.target.value)} className={styles.entrarInput} placeholder="Digite seu username" >
                     </input>
-                    <button type="button" className={styles.entrarButton} onClick={() => Router.push('/home')}>
+                    <button type="button" className={styles.entrarButton} onClick={handleNavigateHome}>
                         <img src="/icons/seta-direita.svg" alt="entrar"/>
                     </button>
                 </div>

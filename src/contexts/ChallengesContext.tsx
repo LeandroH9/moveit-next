@@ -1,7 +1,7 @@
 import { createContext, useState, ReactNode, useEffect } from 'react'
 import Cookies from 'js-cookie';
 import challenges from '../../challenges.json'
-import { LevelUpModal } from '../components/LevelUpModal';
+import { LevelUpModal } from '../components/levelUpModal';
 
 interface Challenge{
     type: 'body' | 'eye';
@@ -10,11 +10,13 @@ interface Challenge{
 }
 
 interface ChallengesContextData{
+    userName: string;
     level: number;
     currentExperience: number;
     challengesCompleted: number;
     activeChallenge: Challenge;
     experienceToNextLevel: number;
+    handleChangeName: (value: string) => void;
     levelUp: () => void;
     startNewChallenge: () => void;
     resetChallenge: () => void;
@@ -27,6 +29,7 @@ interface ChallengesProviderProps {
     level: number;
     currentExperience: number;
     challengesCompleted: number;
+    name: string;
 }
 
 
@@ -35,7 +38,7 @@ export const ChallengesContext = createContext({} as ChallengesContextData)
 
 
 export function ChallengesProvider({ children, ...rest} : ChallengesProviderProps){
-
+    const [userName, setUserName] = useState(rest.name);
     const [level, setLevel] = useState(rest.level ?? 1);
     const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0);
     const [challengesCompleted, setChallengesCompleted] =  useState(rest.challengesCompleted ?? 0);
@@ -101,16 +104,22 @@ export function ChallengesProvider({ children, ...rest} : ChallengesProviderProp
         setChallengesCompleted(challengesCompleted + 1);
     }
 
+    function handleChangeName(name: string){
+        setUserName(name)
+    }
+
     return(
         <ChallengesContext.Provider value={{ 
+            userName,
             level, 
             currentExperience, 
             challengesCompleted, 
+            activeChallenge,
+            experienceToNextLevel,
             levelUp,
             startNewChallenge,
-            activeChallenge,
             resetChallenge,
-            experienceToNextLevel,
+            handleChangeName,
             completeChallenge,
             closeLevelUpModal,
             }}>

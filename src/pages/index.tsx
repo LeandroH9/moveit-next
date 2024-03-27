@@ -1,7 +1,7 @@
 
 import styles from '../styles/pages/Login.module.css'
 
-import {LoginGitHub} from '../components/LoginGitHub'
+import {LoginGitHub} from '../components/loginGitHub'
 
 export default function Login(){
   return(

@@ -11,9 +11,6 @@ export function MenuLateral(){
                 <button type="button">
                     <img src="/icons/botao-home.svg" alt="home"/>
                 </button>
-                <button type="button">
-                    <img src="/icons/medalha.svg" alt="ranking"/>
-                </button>
             </div>
             
         </div>

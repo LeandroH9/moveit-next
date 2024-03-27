@@ -1,22 +1,23 @@
 import Head from 'next/head'
 import {GetServerSideProps} from 'next';
 
-import { CompletedChallenges } from "../components/CompletedChallenges";
-import { ChallengesProvider } from '../contexts/ChallengesContext'
+import { CompletedChallenges } from "../components/completedChallenges";
+import { ChallengesProvider } from '../contexts/challengesContext'
 
-import { Countdown } from "../components/Countdown";
-import { ExperienceBar } from "../components/ExperienceBar";
-import { Profile } from "../components/Profile";
-import { ChallengeBox } from "../components/ChallengeBox";
+import { Countdown } from "../components/countdown";
+import { ExperienceBar } from "../components/experienceBar";
+import { Profile } from "../components/profile";
+import { ChallengeBox } from "../components/challengeBox";
 
 import styles from '../styles/pages/Home.module.css';
-import { CountdownProvider } from '../contexts/CountdownContext';
-import { MenuLateral } from '../components/MenuLateral';
+import { CountdownProvider } from '../contexts/countdownContext';
+import { MenuLateral } from '../components/menuLateral';
 
 interface HomeProps {
   level: number;
   currentExperience: number;
   challengesCompleted: number;
+  name: string;
 }
 
 export default function Home(props: HomeProps) {
@@ -26,6 +27,7 @@ export default function Home(props: HomeProps) {
     level={props.level}
     currentExperience={props.currentExperience}
     challengesCompleted={props.challengesCompleted}
+    name={props.name}
     >
       <div className={styles.container}>
         <nav>
@@ -60,13 +62,14 @@ export default function Home(props: HomeProps) {
 export const getServerSideProps: GetServerSideProps = async(ctx) => {
   //tudo que for buscar dados externos
 
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+  const { level, currentExperience, challengesCompleted, name } = ctx.req.cookies;
 
   return { 
     props: {
       level: Number(level),
       currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
+      challengesCompleted: Number(challengesCompleted),
+      name
     }
   }
 }
